@@ -21,6 +21,8 @@ const buttoniVazhdoNumrIPerseritur = document.getElementById(
   "buttoniVazhdoNumrIPerseritur"
 );
 const resetParas = document.querySelectorAll(".resultParas p");
+
+
 let numriIlevizjeveTeBera = 1;
 let resetButton;
 let numratQeJanVleresuar = [];
@@ -162,12 +164,12 @@ function lojaMbaroi() {
   resetButton.textContent = "Fillo një lojë të rre";
   reset.append(resetButton);
   resetButton.addEventListener("click", rifilloLojen);
-  if (numriIlevizjeveTeBera == 10) {
+  if (numriIlevizjeveTeBera == 11) {
     newGame = `<li class="text-sm"><span class="text-red-500">•</span> Loja ${lojraTeBera++} numri ishte ${randomNumber} nuk u fitua koha ${financial(
       time
     )} s</li>`;
   } else {
-    newGame = `<li class="text-sm"><span class="text-green-500">•</span> Loja ${lojraTeBera++} u fitua me ${--numriIlevizjeveTeBera} lëvizje numri ishte ${randomNumber} për ${financial(
+    newGame = `<li class="text-sm"><span class="text-green-500">•</span> Loja ${lojraTeBera++} u fitua me ${numriIlevizjeveTeBera} lëvizje numri ishte ${randomNumber} për ${financial(
       time
     )} s</li>`;
   }
