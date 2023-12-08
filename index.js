@@ -1,7 +1,6 @@
 import "./style.css";
 let randomNumber = Math.floor(Math.random() * 100) + 1;
-const rezultati = document.getElementById("rezultati");
-rezultati.innerHTML = randomNumber;
+
 const rezultatet = document.querySelector("#rezultatet");
 const rezultatiIFundit = document.querySelector(".lastResult");
 const meIMadhApoMeIVogel = document.querySelector(".lowOrHi");
