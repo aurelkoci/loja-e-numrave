@@ -1,6 +1,7 @@
 import "./style.css";
 let randomNumber = Math.floor(Math.random() * 100) + 1;
-
+const rezultati = document.getElementById("rezultati");
+rezultati.innerHTML = randomNumber;
 const rezultatet = document.querySelector("#rezultatet");
 const rezultatiIFundit = document.querySelector(".lastResult");
 const meIMadhApoMeIVogel = document.querySelector(".lowOrHi");
@@ -34,6 +35,12 @@ var numraMeTeVegjel = [];
 var numraMeTeMdhenje = [];
 let newGame = "";
 var totalSeconds = 0;
+const rezultatetELojrave = [];
+
+JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
+  listaELojrave.insertAdjacentHTML("beforeend", element);
+});
+
 function countTimer() {
   ++totalSeconds;
   var hour = Math.floor(totalSeconds / 3600);
@@ -163,7 +170,11 @@ function lojaMbaroi() {
   resetButton.textContent = "Fillo një lojë të rre";
   reset.append(resetButton);
   resetButton.addEventListener("click", rifilloLojen);
-  if (numriIlevizjeveTeBera == 11) {
+  console.log(Number(fushaEPlotesimitTeNumrit.value));
+  if (
+    numriIlevizjeveTeBera == 10 &&
+    randomNumber !== Number(fushaEPlotesimitTeNumrit.value)
+  ) {
     newGame = `<li class="text-sm"><span class="text-red-500">•</span> Loja ${lojraTeBera++} numri ishte ${randomNumber} nuk u fitua koha ${financial(
       time
     )} s</li>`;
@@ -172,8 +183,26 @@ function lojaMbaroi() {
       time
     )} s</li>`;
   }
-  listaELojrave.insertAdjacentHTML("beforeend", newGame);
+
+  if (!localStorage.getItem("rezultati")) {
+    rezultatetELojrave.push(newGame);
+    localStorage.setItem("rezultati", JSON.stringify(rezultatetELojrave));
+    value.forEach((element) => {
+      listaELojrave.insertAdjacentHTML("beforeend", element);
+    });
+  } else {
+    const value = JSON.parse(localStorage.getItem("rezultati"));
+    value.push(newGame);
+    // rezultatetELojrave.push(newGame);
+    console.log(typeof value);
+    localStorage.setItem("rezultati", JSON.stringify(value));
+    listaELojrave.innerHTML = "";
+    value.forEach((element) => {
+      listaELojrave.insertAdjacentHTML("beforeend", element);
+    });
+  }
 }
+
 function rifilloLojen() {
   numratQeJanVleresuar = [];
   numriIlevizjeveTeBera = 1;
