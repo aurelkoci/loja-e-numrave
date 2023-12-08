@@ -192,15 +192,22 @@ function lojaMbaroi() {
       listaELojrave.insertAdjacentHTML("beforeend", element);
     });
   } else {
-    const value = JSON.parse(localStorage.getItem("rezultati"));
-    value.push(newGame);
-    // rezultatetELojrave.push(newGame);
-    console.log(typeof value);
-    localStorage.setItem("rezultati", JSON.stringify(value));
-    listaELojrave.innerHTML = "";
-    value.forEach((element) => {
-      listaELojrave.insertAdjacentHTML("beforeend", element);
-    });
+    const value = JSON.parse(localStorage.getItem("rezultati")) ?? "";
+    if (value) {
+      value.push(newGame);
+      localStorage.setItem("rezultati", JSON.stringify(value));
+      listaELojrave.innerHTML = "";
+      value.forEach((element) => {
+        listaELojrave.insertAdjacentHTML("beforeend", element);
+      });
+    } else {
+      value.push(newGame);
+      localStorage.setItem("rezultati", JSON.stringify(value));
+      listaELojrave.innerHTML = "";
+      value.forEach((element) => {
+        listaELojrave.insertAdjacentHTML("beforeend", element);
+      });
+    }
   }
 }
 
