@@ -14,13 +14,12 @@ const buttoniVazhdoNumriShumIMadh = document.getElementById(
 const numerShumIMadh = document.getElementById("numerShumIMadh");
 const levizjeTeMbetura = document.getElementById("levizjeTeMbetura");
 const koha = document.getElementById("koha");
-const numraMeTeMdhenjeP = document.getElementById("numraMeTeMdhenje");
-const numraMeTeVegjelP = document.getElementById("numraMeTeVegjel");
 const numerIperseritur = document.getElementById("numerIperseritur");
 const buttoniVazhdoNumrIPerseritur = document.getElementById(
   "buttoniVazhdoNumrIPerseritur"
 );
 const resetParas = document.querySelectorAll(".resultParas p");
+const fshiHistorin = document.getElementById("fshiHistorin");
 
 let numriIlevizjeveTeBera = 1;
 let resetButton;
@@ -35,11 +34,17 @@ var numraMeTeMdhenje = [];
 let newGame = "";
 var totalSeconds = 0;
 const rezultatetELojrave = [];
-
+var timerVar;
 if (JSON.parse(localStorage.getItem("rezultati"))) {
   JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
     listaELojrave.insertAdjacentHTML("beforeend", element);
   });
+}
+
+fshiHistorin.addEventListener("click", fshiHistorinFunksion);
+function fshiHistorinFunksion() {
+  localStorage.removeItem("rezultati");
+  listaELojrave.innerHTML = "";
 }
 
 function countTimer() {
@@ -54,7 +59,6 @@ function countTimer() {
   mbaroi = hour + ":" + minute + ":" + seconds;
 }
 
-var timerVar;
 const filloIntervalin = () => {
   timerVar = setInterval(countTimer, 1000);
 };
@@ -164,14 +168,14 @@ function lojaMbaroi() {
   fushaEPlotesimitTeNumrit.disabled = true;
   dorzoKerkesenELojtarit.disabled = true;
   dorzoKerkesenELojtarit.className =
-    "disabled:opacity-75 flex w-64 mt-4 justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600";
+    "disabled:opacity-75 flex w-full  md:w-64 mt-4 justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600";
   resetButton = document.createElement("button");
   resetButton.className =
-    "flex w-64 mt-4 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-bold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
+    "flex w-full  md:w-64 mt-4 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-bold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
   resetButton.textContent = "Fillo një lojë të rre";
   reset.append(resetButton);
   resetButton.addEventListener("click", rifilloLojen);
-  console.log(Number(fushaEPlotesimitTeNumrit.value));
+
   if (
     numriIlevizjeveTeBera == 10 &&
     randomNumber !== Number(fushaEPlotesimitTeNumrit.value)
@@ -184,15 +188,14 @@ function lojaMbaroi() {
       time
     )} s</li>`;
   }
-
-  if (!localStorage.getItem("rezultati")) {
+  const value = JSON.parse(localStorage.getItem("rezultati")) ?? "";
+  if (!value) {
+    listaELojrave.innerHTML = "";
     rezultatetELojrave.push(newGame);
     localStorage.setItem("rezultati", JSON.stringify(rezultatetELojrave));
-    value.forEach((element) => {
-      listaELojrave.insertAdjacentHTML("beforeend", element);
-    });
+
+    listaELojrave.insertAdjacentHTML("beforeend", newGame);
   } else {
-    const value = JSON.parse(localStorage.getItem("rezultati")) ?? "";
     if (value) {
       value.push(newGame);
       localStorage.setItem("rezultati", JSON.stringify(value));
@@ -215,7 +218,7 @@ function rifilloLojen() {
   numratQeJanVleresuar = [];
   numriIlevizjeveTeBera = 1;
   dorzoKerkesenELojtarit.className =
-    "guessSubmit flex w-64 mt-4 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
+    "guessSubmit flex w-full  md:w-64 mt-4 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
   for (const resetPara of resetParas) {
     resetPara.textContent = "";
   }
