@@ -36,9 +36,11 @@ let newGame = "";
 var totalSeconds = 0;
 const rezultatetELojrave = [];
 
-JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
-  listaELojrave.insertAdjacentHTML("beforeend", element);
-});
+if (JSON.parse(localStorage.getItem("rezultati"))) {
+  JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
+    listaELojrave.insertAdjacentHTML("beforeend", element);
+  });
+}
 
 function countTimer() {
   ++totalSeconds;
