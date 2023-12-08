@@ -101,11 +101,11 @@ function kontrolloPergjigjen() {
   }
   let levizjePerTeMbaruarLojen = 10 - numratQeJanVleresuar.length;
   if (levizjePerTeMbaruarLojen > 4) {
-    levizjeTeMbetura.innerHTML = `<p>Ju keni <span class="text-green-500">${levizjePerTeMbaruarLojen}</span>  për të mbetua</p>`;
+    levizjeTeMbetura.innerHTML = `<p>Ju keni <span class="text-green-500">${levizjePerTeMbaruarLojen}</span>  për të mbetura</p>`;
   } else if (levizjePerTeMbaruarLojen <= 4 && levizjePerTeMbaruarLojen > 2) {
-    levizjeTeMbetura.innerHTML = `<p>Ju keni <span class="text-red-500">${levizjePerTeMbaruarLojen}</span>  për të mbetua</p>`;
+    levizjeTeMbetura.innerHTML = `<p>Ju keni <span class="text-red-500">${levizjePerTeMbaruarLojen}</span>  për të mbetura</p>`;
   } else {
-    levizjeTeMbetura.innerHTML = `<p class="text-2xl font-bold text-red-700 overflow-hidden">Kujdes ke ${levizjePerTeMbaruarLojen} për të mbetua</p>`;
+    levizjeTeMbetura.innerHTML = `<p class="text-2xl font-bold text-red-700 overflow-hidden">Kujdes ke ${levizjePerTeMbaruarLojen} për të mbetura</p>`;
   }
 
   const userGuess = Number(fushaEPlotesimitTeNumrit.value);
@@ -122,7 +122,7 @@ function kontrolloPergjigjen() {
   }
   rezultatet.innerHTML = `Numrat e qe keni provuar: ${numraMeTeVegjel} ... ${numraMeTeMdhenje}`;
   if (userGuess === randomNumber) {
-    rezultatiIFundit.textContent = "Urrime! Ju e gjetët numrin!";
+    rezultatiIFundit.textContent = "Urime! Ju e gjetët numrin!";
     rezultatiIFundit.className = "text-3xl font-bold text-green-500";
     meIMadhApoMeIVogel.textContent = "";
     lojaMbaroi();
