@@ -22,7 +22,6 @@ const buttoniVazhdoNumrIPerseritur = document.getElementById(
 );
 const resetParas = document.querySelectorAll(".resultParas p");
 
-
 let numriIlevizjeveTeBera = 1;
 let resetButton;
 let numratQeJanVleresuar = [];
