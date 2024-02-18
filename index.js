@@ -24,7 +24,7 @@ const fshiHistorin = document.getElementById("fshiHistorin");
 let numriIlevizjeveTeBera = 1;
 let resetButton;
 let numratQeJanVleresuar = [];
-let lojraTeBera = 1;
+var lojraTeBera = 1;
 var start = "";
 var end = "";
 var time = "";
@@ -35,15 +35,28 @@ let newGame = "";
 var totalSeconds = 0;
 const rezultatetELojrave = [];
 var timerVar;
+
 if (JSON.parse(localStorage.getItem("rezultati"))) {
+  lojraTeBera = 1;
   JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
     listaELojrave.insertAdjacentHTML("beforeend", element);
+
+    ++lojraTeBera;
+
+    console.log(lojraTeBera);
   });
 }
+// if (localStorage.getItem("rezultati")) {
+//   JSON.parse(localStorage.getItem("rezultati")).forEach(() => {
+
+//   });
+//   console.log(lojraTeBera);
+// }
 
 fshiHistorin.addEventListener("click", fshiHistorinFunksion);
 function fshiHistorinFunksion() {
   localStorage.removeItem("rezultati");
+  localStorage.removeItem("nr-loje");
   listaELojrave.innerHTML = "";
 }
 
