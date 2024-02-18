@@ -40,10 +40,7 @@ if (JSON.parse(localStorage.getItem("rezultati"))) {
   lojraTeBera = 1;
   JSON.parse(localStorage.getItem("rezultati")).forEach((element) => {
     listaELojrave.insertAdjacentHTML("beforeend", element);
-
     ++lojraTeBera;
-
-    console.log(lojraTeBera);
   });
 }
 // if (localStorage.getItem("rezultati")) {
@@ -56,7 +53,7 @@ if (JSON.parse(localStorage.getItem("rezultati"))) {
 fshiHistorin.addEventListener("click", fshiHistorinFunksion);
 function fshiHistorinFunksion() {
   localStorage.removeItem("rezultati");
-  localStorage.removeItem("nr-loje");
+  lojraTeBera = 1;
   listaELojrave.innerHTML = "";
 }
 
