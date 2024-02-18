@@ -1,6 +1,11 @@
 import "./style.css";
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 
+const modal = document.getElementById("modal");
+const madolTitle = document.getElementById("modal-title");
+const modalText = document.getElementById("modal-text");
+const modalButton = document.getElementById("modal-button");
+
 const rezultatet = document.querySelector("#rezultatet");
 const rezultatiIFundit = document.querySelector(".lastResult");
 const meIMadhApoMeIVogel = document.querySelector(".lowOrHi");
@@ -10,16 +15,9 @@ const fushaEPlotesimitTeNumrit = document.querySelector(
 );
 const listaELojrave = document.getElementById("listGame");
 const reset = document.getElementById("reset");
-const buttoniVazhdoNumriShumIMadh = document.getElementById(
-  "buttoniVazhdoNumriShumIMadh"
-);
-const numerShumIMadh = document.getElementById("numerShumIMadh");
 const levizjeTeMbetura = document.getElementById("levizjeTeMbetura");
 const koha = document.getElementById("koha");
-const numerIperseritur = document.getElementById("numerIperseritur");
-const buttoniVazhdoNumrIPerseritur = document.getElementById(
-  "buttoniVazhdoNumrIPerseritur"
-);
+
 const resetParas = document.querySelectorAll(".resultParas p");
 const fshiHistorin = document.getElementById("fshiHistorin");
 
@@ -45,13 +43,6 @@ if (JSON.parse(localStorage.getItem("rezultati"))) {
     ++lojraTeBera;
   });
 }
-// if (localStorage.getItem("rezultati")) {
-//   JSON.parse(localStorage.getItem("rezultati")).forEach(() => {
-
-//   });
-//   console.log(lojraTeBera);
-// }
-
 fshiHistorin.addEventListener("click", fshiHistorinFunksion);
 function fshiHistorinFunksion() {
   localStorage.removeItem("rezultati");
@@ -74,26 +65,13 @@ function countTimer() {
 const filloIntervalin = () => {
   timerVar = setInterval(countTimer, 1000);
 };
-function hiqLajmeriminNumerIPerseritur() {
-  numerShumIMadh.style.display = "none";
+function hiqModal() {
+  modal.style.display = "none";
+
   setTimeout(() => {
     fushaEPlotesimitTeNumrit.focus();
   }, 200);
 }
-buttoniVazhdoNumriShumIMadh.addEventListener(
-  "click",
-  hiqLajmeriminNumerIPerseritur
-);
-function hiqLajmeriminButtoniVazhdoNumrIPerseritur() {
-  numerIperseritur.style.display = "none";
-  setTimeout(() => {
-    fushaEPlotesimitTeNumrit.focus();
-  }, 200);
-}
-buttoniVazhdoNumrIPerseritur.addEventListener(
-  "click",
-  hiqLajmeriminButtoniVazhdoNumrIPerseritur
-);
 function kontrolloPergjigjen() {
   if (start == "") {
     filloIntervalin();
@@ -107,14 +85,38 @@ function kontrolloPergjigjen() {
     return;
   }
   if (fushaEPlotesimitTeNumrit.value > 100) {
-    numerShumIMadh.style.display = "block";
-    buttoniVazhdoNumriShumIMadh.focus();
+    modal.style.display = "block";
+    madolTitle.innerHTML = `Gabim numri që futët është shume i madh`;
+    modalText.innerHTML = `Numri duhet të jetë midis 1 dhe 100.`;
+    modalButton.focus();
+    modalButton.addEventListener("click", hiqModal);
+    return;
+  }
+  if (fushaEPlotesimitTeNumrit.value < 1) {
+    modal.style.display = "block";
+    madolTitle.innerHTML = `Gabim numri që futët është shume i vogël`;
+    modalText.innerHTML = `Numri duhet të jetë midis 1 dhe 100.`;
+    modalButton.focus();
+    modalButton.addEventListener("click", hiqModal);
+    return;
+  }
+  if (!Number.isInteger(parseFloat(fushaEPlotesimitTeNumrit.value))) {
+    console.log(fushaEPlotesimitTeNumrit.value);
+    modal.style.display = "block";
+    madolTitle.innerHTML = `Gabim numri që futët nuk është i plotë`;
+    modalText.innerHTML = `Numri duhet i plot dhe midis 1 dhe 100.`;
+    modalButton.focus();
+    modalButton.addEventListener("click", hiqModal);
     return;
   }
   if (numratQeJanVleresuar.includes(fushaEPlotesimitTeNumrit.value)) {
-    numerIperseritur.style.display = "block";
-    buttoniVazhdoNumrIPerseritur.focus();
+    modal.style.display = "block";
+    madolTitle.innerHTML = `Gabim numri është provuar
+    njëherë`;
+    modalText.innerHTML = `Ju lutem provoni numra që nuk i keni provuar më parë.`;
+    modalButton.focus();
     fushaEPlotesimitTeNumrit.value = "";
+    modalButton.addEventListener("click", hiqModal);
     return;
   } else {
     numratQeJanVleresuar.push(fushaEPlotesimitTeNumrit.value);
