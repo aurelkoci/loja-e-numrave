@@ -5,7 +5,9 @@ const rezultatet = document.querySelector("#rezultatet");
 const rezultatiIFundit = document.querySelector(".lastResult");
 const meIMadhApoMeIVogel = document.querySelector(".lowOrHi");
 const dorzoKerkesenELojtarit = document.querySelector("#submit");
-const fushaEPlotesimitTeNumrit = document.querySelector(".guessField");
+const fushaEPlotesimitTeNumrit = document.querySelector(
+  "#fushaEPlotesimitTeNumrit"
+);
 const listaELojrave = document.getElementById("listGame");
 const reset = document.getElementById("reset");
 const buttoniVazhdoNumriShumIMadh = document.getElementById(
@@ -74,6 +76,9 @@ const filloIntervalin = () => {
 };
 function hiqLajmeriminNumerIPerseritur() {
   numerShumIMadh.style.display = "none";
+  setTimeout(() => {
+    fushaEPlotesimitTeNumrit.focus();
+  }, 200);
 }
 buttoniVazhdoNumriShumIMadh.addEventListener(
   "click",
@@ -81,6 +86,9 @@ buttoniVazhdoNumriShumIMadh.addEventListener(
 );
 function hiqLajmeriminButtoniVazhdoNumrIPerseritur() {
   numerIperseritur.style.display = "none";
+  setTimeout(() => {
+    fushaEPlotesimitTeNumrit.focus();
+  }, 200);
 }
 buttoniVazhdoNumrIPerseritur.addEventListener(
   "click",
@@ -100,10 +108,12 @@ function kontrolloPergjigjen() {
   }
   if (fushaEPlotesimitTeNumrit.value > 100) {
     numerShumIMadh.style.display = "block";
+    buttoniVazhdoNumriShumIMadh.focus();
     return;
   }
   if (numratQeJanVleresuar.includes(fushaEPlotesimitTeNumrit.value)) {
     numerIperseritur.style.display = "block";
+    buttoniVazhdoNumrIPerseritur.focus();
     fushaEPlotesimitTeNumrit.value = "";
     return;
   } else {
